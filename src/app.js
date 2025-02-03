@@ -6,7 +6,7 @@ import morgan from 'morgan';
 const app = express();
 
 app.use(cors({
-    origin: ["https://video-tube-frontend-iz2n.vercel.app/", "http://localhost:5173"], 
+    origin: ["https://video-tube-frontend-iz2n.vercel.app/", "http://localhost:5173","https://video-tube-frontend-iz2n-git-main-om-jains-projects.vercel.app"], 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
