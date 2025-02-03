@@ -27,7 +27,7 @@ const generateAccessAndRefereshTokens = async(userId) =>{
 const registerUser = asyncHandler(async (req, res) => {
     // Extract fields from request body
     const { fullname, email, username, password } = req.body;
-    
+    console.log("email: ",email);
     // Validate fields
     if ([fullname, email, username, password].some((field) => field?.trim() === "")) {
       throw new ApiError(400, "All fields are required");
@@ -74,7 +74,7 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
       username: username.toLowerCase(),
     });
-  
+
     // Fetch the created user (excluding sensitive fields)
     const createdUser = await User.findById(user._id).select(
       "-password -refreshToken"
@@ -135,7 +135,7 @@ const registerUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true
     }
-
+   
     return res
     .status(200)
     .cookie("accessToken", accessToken, options)
@@ -149,6 +149,7 @@ const registerUser = asyncHandler(async (req, res) => {
             "User logged In Successfully"
         )
     )
+    
 
 })
 
