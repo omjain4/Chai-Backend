@@ -263,58 +263,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
-// const refreshAccessToken = asyncHandler(async (req, res, next) => {
-//   const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
-
-//   if (!incomingRefreshToken) {
-//     throw new ApiError(401, "Unauthorized request");
-//   }
-
-//   try {
-//     const decodedToken = jwt.verify(
-//       incomingRefreshToken,
-//       process.env.REFRESH_TOKEN_SECRET
-//     );
-
-//     const user = await User.findById(decodedToken?._id);
-
-//     if (!user) {
-//       throw new ApiError(401, "Invalid refresh token");
-//     }
-
-//     if (incomingRefreshToken !== user?.refreshToken) {
-//       throw new ApiError(401, "Refresh token is expired or used");
-//     }
-
-//     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
-
-//     // Set the new tokens as cookies
-//     res.cookie("accessToken", accessToken, COOKIE_OPTIONS);
-//     res.cookie("refreshToken", refreshToken, {
-//       ...COOKIE_OPTIONS,
-//       maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
-//     });
-
-//     // If this is an API call, send the response
-//     if (req.xhr || req.headers.accept.indexOf('json') > -1) {
-//       return res.status(200).json(
-//         new ApiResponse(
-//           200, 
-//           { accessToken, refreshToken },
-//           "Access token refreshed"
-//         )
-//       );
-//     }
-
-//     // If it's not an API call, continue to the next middleware
-//     next();
-//   } catch (error) {
-//     throw new ApiError(401, error?.message || "Invalid refresh token");
-//   }
-// });
-
-// TODO Remove password from response.... .lean()
-
 const changePassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
